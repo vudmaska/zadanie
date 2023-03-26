@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +26,13 @@ public class ArticleHibernateDAO implements ArticleDAO {
   @SuppressWarnings("unchecked")
   @Override
   public List<Article> findAll() {
-    return this.sessionFactory.getCurrentSession().createSQLQuery("select * from articles").addEntity(Article.class).list();
+    Session session = this.sessionFactory.getCurrentSession();
+    String sql = "SELECT id, author, create_timestamp as created, text, title FROM articles";
+    SQLQuery query = session.createSQLQuery(sql).addScalar("id").addScalar("author").addScalar("created").addScalar("text").addScalar("title");
+    query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+    List results = query.list();
+
+    return results;
   }
 
   @Override
