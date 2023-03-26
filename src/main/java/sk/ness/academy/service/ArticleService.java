@@ -20,4 +20,8 @@ public interface ArticleService {
 	  void ingestArticles(String jsonArticles);
 
 	void createComment(Integer articleId, String content);
+
+	List<Comment> readComments(Integer articleId);
+
+	void deleteComment(Integer articleId, Integer commentId);
 }

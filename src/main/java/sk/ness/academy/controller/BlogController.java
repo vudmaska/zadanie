@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.*;
 
+import sk.ness.academy.dao.ArticleDAO;
 import sk.ness.academy.domain.Article;
 import sk.ness.academy.domain.Comment;
 import sk.ness.academy.dto.Author;
@@ -21,6 +22,9 @@ public class BlogController {
 
     @Resource
     private AuthorService authorService;
+
+    @Resource
+    private ArticleDAO articleDAO;
 
     // ~~ Article
     @RequestMapping(value = "articles", method = RequestMethod.GET)
@@ -59,5 +63,15 @@ public class BlogController {
     @PutMapping(value = "articles/{articleId}")
     public void createComment(@RequestBody @PathVariable final Integer articleId, @RequestBody final String content) {
         this.articleService.createComment(articleId, content);
+    }
+
+    @RequestMapping(value = "articles/{articleId}/comments", method = RequestMethod.GET)
+    public List<Comment> getComments(@PathVariable final Integer articleId) {
+        return this.articleService.readComments(articleId);
+    }
+
+    @DeleteMapping(value = "articles/{articleId}/comments")
+    void deleteComment(@PathVariable final Integer articleId, @RequestBody final Integer commentId) {
+        this.articleService.deleteComment(articleId, commentId);
     }
 }

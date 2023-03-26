@@ -17,10 +17,6 @@ public class Comment implements Serializable {
     @Column
     private String content;
 
-    //@ManyToOne
-    //@JoinColumn(name = "id")
-    //private Article article;
-
     public Integer getCommentId() {
         return commentId;
     }
@@ -38,11 +34,4 @@ public class Comment implements Serializable {
         return content;
     }
 
-    //public Article getArticle() {
-    //    return article;
-    //}
-
-    //public void setArticle(Article article) {
-    //    this.article = article;
-   // }
 }

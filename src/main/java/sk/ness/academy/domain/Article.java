@@ -18,7 +18,7 @@ public class Article {
   @Column(name = "ID")
   private Integer id;
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name="id")
   private List<Comment> commentList;
 

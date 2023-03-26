@@ -1,14 +1,10 @@
 package sk.ness.academy.service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import sk.ness.academy.dao.ArticleDAO;
@@ -53,6 +49,22 @@ public class ArticleServiceImpl implements ArticleService {
     article.setCommentList(comments);
     this.articleDAO.persist(article);
 
+  }
+
+  @Override
+  public List<Comment> readComments(Integer articleId) {
+    Article article = this.articleDAO.findByID(articleId);
+    List<Comment> comments = article.getCommentList();
+    return comments;
+  }
+
+  @Override
+  public void deleteComment(Integer articleId, Integer commentId) {
+    Article article = this.articleDAO.findByID(articleId);
+    List<Comment> comments = article.getCommentList();
+    comments.remove(commentId);
+    article.setCommentList(comments);
+    this.articleDAO.persist(article);
   }
 
 

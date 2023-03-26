@@ -31,4 +31,5 @@ public class ArticleHibernateDAO implements ArticleDAO {
     this.sessionFactory.getCurrentSession().saveOrUpdate(article);
   }
 
+
 }

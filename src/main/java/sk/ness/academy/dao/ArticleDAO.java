@@ -14,4 +14,5 @@ public interface ArticleDAO {
 
 	  /** Persists {@link Article} into the DB */
 	  void persist(Article article);
+
 	}
