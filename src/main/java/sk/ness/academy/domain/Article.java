@@ -20,7 +20,7 @@ public class Article {
 
   @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name="id")
-  private List<Comment> commentList;
+  private List<Comment> comments;
 
   @Column(name = "title", length = 250)
   private String title;
@@ -74,16 +74,12 @@ public class Article {
     this.createTimestamp = createTimestamp;
   }
 
-  public List<Comment> getCommentList() {
-    return commentList;
+  public List<Comment> getComments() {
+    return comments;
   }
 
-  public void setCommentList(List<Comment> commentList) {
-    this.commentList = commentList;
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
   }
 
-//  public void addOrder(Comment comment){
-  //  comment.setArticle(this);
-    //commentList.add(comment);
-  //}
 }

@@ -44,9 +44,9 @@ public class ArticleServiceImpl implements ArticleService {
     Article article = this.articleDAO.findByID(articleId);
     Comment comment = new Comment();
     comment.setContent(content);
-    List<Comment> comments = article.getCommentList();
+    List<Comment> comments = article.getComments();
     comments.add(comment);
-    article.setCommentList(comments);
+    article.setComments(comments);
     this.articleDAO.persist(article);
 
   }
@@ -54,16 +54,16 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   public List<Comment> readComments(Integer articleId) {
     Article article = this.articleDAO.findByID(articleId);
-    List<Comment> comments = article.getCommentList();
+    List<Comment> comments = article.getComments();
     return comments;
   }
 
   @Override
   public void deleteComment(Integer articleId, Integer commentId) {
     Article article = this.articleDAO.findByID(articleId);
-    List<Comment> comments = article.getCommentList();
+    List<Comment> comments = article.getComments();
     comments.remove(commentId);
-    article.setCommentList(comments);
+    article.setComments(comments);
     this.articleDAO.persist(article);
   }
 
