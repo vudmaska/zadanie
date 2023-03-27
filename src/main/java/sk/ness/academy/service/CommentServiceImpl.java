@@ -38,7 +38,6 @@ public class CommentServiceImpl implements CommentService{
     }
 
     public void deleteComment(Integer articleId, Integer commentId) {
-        Article article = this.articleDAO.findByID(articleId);
         Session session = this.sessionFactory.getCurrentSession();
         session.createSQLQuery("delete from comments where commentId = :commentId").setParameter("commentId", commentId).executeUpdate();
     }

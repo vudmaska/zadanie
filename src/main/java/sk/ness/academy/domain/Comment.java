@@ -17,9 +17,6 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentId;
 
-    @Column(name = "id")
-    private Integer id;
-
     @Column(name = "author")
     private String author;
 
@@ -45,14 +42,6 @@ public class Comment implements Serializable {
     public String setContent(String content) {
         this.content = content;
         return content;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getAuthor() {

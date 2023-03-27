@@ -1,19 +1,15 @@
 package sk.ness.academy.service;
 
-import java.nio.file.Paths;
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
+import sk.ness.academy.dao.ArticleDAO;
+import sk.ness.academy.domain.Article;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Service;
-
-import sk.ness.academy.dao.ArticleDAO;
-import sk.ness.academy.domain.Article;
-import sk.ness.academy.domain.Comment;
+import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 @Transactional

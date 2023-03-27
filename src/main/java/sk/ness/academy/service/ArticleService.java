@@ -1,9 +1,8 @@
 package sk.ness.academy.service;
 
-import java.util.List;
-
 import sk.ness.academy.domain.Article;
-import sk.ness.academy.domain.Comment;
+
+import java.util.List;
 
 public interface ArticleService {
 
