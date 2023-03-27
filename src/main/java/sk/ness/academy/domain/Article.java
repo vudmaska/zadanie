@@ -33,7 +33,7 @@ public class Article {
   @Temporal(TemporalType.TIMESTAMP)
   private Date createTimestamp;
 
-  @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name="id")
   private List<Comment> comments;
   public Integer getId() {

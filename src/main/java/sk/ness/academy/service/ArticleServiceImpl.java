@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
 import sk.ness.academy.dao.ArticleDAO;
@@ -14,6 +16,9 @@ import sk.ness.academy.domain.Comment;
 @Service
 @Transactional
 public class ArticleServiceImpl implements ArticleService {
+
+  @Resource(name = "sessionFactory")
+  private SessionFactory sessionFactory;
 
   @Resource
   private ArticleDAO articleDAO;
@@ -42,8 +47,6 @@ public class ArticleServiceImpl implements ArticleService {
   public void createComment(Integer articleId, Comment comment) {
 
     Article article = this.articleDAO.findByID(articleId);
-    //Comment comment = new Comment();
-    //comment.setContent(content);
     List<Comment> comments = article.getComments();
     comments.add(comment);
     article.setComments(comments);
@@ -61,10 +64,14 @@ public class ArticleServiceImpl implements ArticleService {
   @Override
   public void deleteComment(Integer articleId, Integer commentId) {
     Article article = this.articleDAO.findByID(articleId);
-    List<Comment> comments = article.getComments();
-    comments.remove(commentId);
-    article.setComments(comments);
-    this.articleDAO.persist(article);
+    //List<Comment> comments = article.getComments();
+    //comments.remove(commentId);
+    //article.setComments(comments);
+    //this.articleDAO.persist(article);
+
+    Session session = this.sessionFactory.getCurrentSession();
+    //session.persist(article);
+    session.createSQLQuery("delete from comments where commentId = :commentId").setParameter("commentId", commentId).executeUpdate();
   }
 
 
