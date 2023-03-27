@@ -39,11 +39,11 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public void createComment(Integer articleId, String content) {
+  public void createComment(Integer articleId, Comment comment) {
 
     Article article = this.articleDAO.findByID(articleId);
-    Comment comment = new Comment();
-    comment.setContent(content);
+    //Comment comment = new Comment();
+    //comment.setContent(content);
     List<Comment> comments = article.getComments();
     comments.add(comment);
     article.setComments(comments);

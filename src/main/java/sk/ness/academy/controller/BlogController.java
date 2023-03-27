@@ -61,8 +61,8 @@ public class BlogController {
     // ~~ Comments
 
     @PutMapping(value = "articles/{articleId}")
-    public void createComment(@RequestBody @PathVariable final Integer articleId, @RequestBody final String content) {
-        this.articleService.createComment(articleId, content);
+    public void createComment(@RequestBody @PathVariable final Integer articleId, @RequestBody final Comment comment) {
+         this.articleService.createComment(articleId, comment);
     }
 
     @RequestMapping(value = "articles/{articleId}/comments", method = RequestMethod.GET)

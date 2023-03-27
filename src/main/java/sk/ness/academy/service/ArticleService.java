@@ -19,7 +19,7 @@ public interface ArticleService {
 	  /** Creates new {@link Article}s by ingesting all articles from json */
 	  void ingestArticles(String jsonArticles);
 
-	void createComment(Integer articleId, String content);
+	void createComment(Integer articleId, Comment comment);
 
 	List<Comment> readComments(Integer articleId);
 

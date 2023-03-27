@@ -18,9 +18,7 @@ public class Article {
   @Column(name = "ID")
   private Integer id;
 
-  @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
-  @JoinColumn(name="id")
-  private List<Comment> comments;
+
 
   @Column(name = "title", length = 250)
   private String title;
@@ -34,6 +32,10 @@ public class Article {
   @Column(name = "create_timestamp")
   @Temporal(TemporalType.TIMESTAMP)
   private Date createTimestamp;
+
+  @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+  @JoinColumn(name="id")
+  private List<Comment> comments;
   public Integer getId() {
     return this.id;
   }
