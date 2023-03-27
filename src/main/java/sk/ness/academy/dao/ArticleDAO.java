@@ -15,4 +15,8 @@ public interface ArticleDAO {
 	  /** Persists {@link Article} into the DB */
 	  void persist(Article article);
 
+	  void deleteByID(Integer articleId);
+
+	  List<Article> searchArticles(String searchText);
+
 	}

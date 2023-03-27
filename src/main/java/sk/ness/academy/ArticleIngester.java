@@ -25,7 +25,7 @@ public class ArticleIngester {
 
       // Load file with articles and ingest
 
-      articleService.ingestArticles(null);
+      articleService.ingestArticles("C:\\Akademia\\Java\\Academy\\zadanie\\zadanie_pokusy\\articles_to_ingest.txt");
     }
   }
 }

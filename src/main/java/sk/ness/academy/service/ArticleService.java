@@ -19,9 +19,13 @@ public interface ArticleService {
 	  /** Creates new {@link Article}s by ingesting all articles from json */
 	  void ingestArticles(String jsonArticles);
 
-	void createComment(Integer articleId, Comment comment);
+	  void deleteByID(Integer articleId);
 
-	List<Comment> readComments(Integer articleId);
+	  List<Article> searchArticles(String searchText);
 
-	void deleteComment(Integer articleId, Integer commentId);
+	  void createComment(Integer articleId, Comment comment);
+
+	  List<Comment> readComments(Integer articleId);
+
+	  void deleteComment(Integer articleId, Integer commentId);
 }

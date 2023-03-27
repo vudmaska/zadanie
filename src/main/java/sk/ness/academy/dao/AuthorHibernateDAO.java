@@ -6,10 +6,12 @@ import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.AliasToBeanResultTransformer;
+import org.hibernate.type.IntegerType;
 import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
 
 import sk.ness.academy.dto.Author;
+import sk.ness.academy.dto.AuthorStats;
 
 @Repository
 public class AuthorHibernateDAO implements AuthorDAO {
@@ -23,6 +25,16 @@ public class AuthorHibernateDAO implements AuthorDAO {
     return this.sessionFactory.getCurrentSession().createSQLQuery("select distinct a.author as name from articles a ")
         .addScalar("name", StringType.INSTANCE)
         .setResultTransformer(new AliasToBeanResultTransformer(Author.class)).list();
+  }
+
+  @Override
+  public List<AuthorStats> listOfAuthors() {
+    List<Author> allAuthors = findAll();
+    //  List countedAuthors = new ArrayList<AuthorStats>();
+    return this.sessionFactory.getCurrentSession().createSQLQuery("select author as authorName, count(author) as articleCount from articles group by author")
+            .addScalar("authorName", StringType.INSTANCE)
+            .addScalar("articleCount", IntegerType.INSTANCE)
+            .setResultTransformer(new AliasToBeanResultTransformer(AuthorStats.class)).list();
   }
 
 }

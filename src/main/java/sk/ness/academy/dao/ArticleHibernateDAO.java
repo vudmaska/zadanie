@@ -40,5 +40,19 @@ public class ArticleHibernateDAO implements ArticleDAO {
     this.sessionFactory.getCurrentSession().saveOrUpdate(article);
   }
 
+  @Override
+  public void deleteByID(final Integer articleId) {
+    Article article = sessionFactory.getCurrentSession().load(Article.class, articleId);
+    this.sessionFactory.getCurrentSession().delete(article);
+  }
+
+  @Override
+  public List<Article> searchArticles(String searchText) {
+    return this.sessionFactory.getCurrentSession().createSQLQuery(
+                    "SELECT * FROM articles WHERE author LIKE concat(concat('%', :searchText), '%') OR title LIKE concat(concat('%', :searchText), '%') OR text LIKE concat(concat('%', :searchText), '%')")
+            .setParameter("searchText", searchText)
+            .addEntity(Article.class)
+            .list();
+  }
 
 }
