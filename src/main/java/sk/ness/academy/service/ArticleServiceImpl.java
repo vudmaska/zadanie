@@ -57,31 +57,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
   }
 
-  @Override
-  public void createComment(Integer articleId, Comment comment) {
-
-    Article article = this.articleDAO.findByID(articleId);
-    List<Comment> comments = article.getComments();
-    comments.add(comment);
-    article.setComments(comments);
-    this.articleDAO.persist(article);
-
-  }
-
-  @Override
-  public List<Comment> readComments(Integer articleId) {
-    Article article = this.articleDAO.findByID(articleId);
-    List<Comment> comments = article.getComments();
-    return comments;
-  }
-
-  @Override
-  public void deleteComment(Integer articleId, Integer commentId) {
-    Article article = this.articleDAO.findByID(articleId);
-    Session session = this.sessionFactory.getCurrentSession();
-    session.createSQLQuery("delete from comments where commentId = :commentId").setParameter("commentId", commentId).executeUpdate();
-  }
-
   public void deleteByID(Integer articleId) {
     this.articleDAO.deleteByID(articleId);
   }

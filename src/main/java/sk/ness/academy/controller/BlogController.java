@@ -13,6 +13,7 @@ import sk.ness.academy.dto.Author;
 import sk.ness.academy.dto.AuthorStats;
 import sk.ness.academy.service.ArticleService;
 import sk.ness.academy.service.AuthorService;
+import sk.ness.academy.service.CommentService;
 
 @RestController
 public class BlogController {
@@ -25,6 +26,9 @@ public class BlogController {
 
     @Resource
     private ArticleDAO articleDAO;
+
+    @Resource
+    private CommentService commentService;
 
     // ~~ Article
     @RequestMapping(value = "articles", method = RequestMethod.GET)
@@ -67,16 +71,16 @@ public class BlogController {
 
     @PutMapping(value = "articles/{articleId}")
     public void createComment(@RequestBody @PathVariable final Integer articleId, @RequestBody final Comment comment) {
-         this.articleService.createComment(articleId, comment);
+         this.commentService.createComment(articleId, comment);
     }
 
     @RequestMapping(value = "articles/{articleId}/comments", method = RequestMethod.GET)
     public List<Comment> getComments(@PathVariable final Integer articleId) {
-        return this.articleService.readComments(articleId);
+        return this.commentService.readComments(articleId);
     }
 
     @DeleteMapping(value = "articles/{articleId}/comments")
     void deleteComment(@PathVariable final Integer articleId, @RequestBody final Integer commentId) {
-        this.articleService.deleteComment(articleId, commentId);
+        this.commentService.deleteComment(articleId, commentId);
     }
 }

@@ -23,9 +23,4 @@ public interface ArticleService {
 
 	  List<Article> searchArticles(String searchText);
 
-	  void createComment(Integer articleId, Comment comment);
-
-	  List<Comment> readComments(Integer articleId);
-
-	  void deleteComment(Integer articleId, Integer commentId);
 }
