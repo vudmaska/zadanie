@@ -1,5 +1,6 @@
 package sk.ness.academy.service;
 
+import org.springframework.http.ResponseEntity;
 import sk.ness.academy.domain.Comment;
 
 import java.util.List;
@@ -11,5 +12,5 @@ public interface CommentService {
 
     List<Comment> readComments(Integer articleId);
 
-    void deleteComment(Integer articleId, Integer commentId);
+    ResponseEntity deleteComment(Integer articleId, Integer commentId);
 }

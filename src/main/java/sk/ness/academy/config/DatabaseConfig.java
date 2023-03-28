@@ -1,7 +1,5 @@
 package sk.ness.academy.config;
 
-import javax.sql.DataSource;
-
 import org.hibernate.SessionFactory;
 import org.hsqldb.jdbc.JDBCDriver;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +7,8 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
 
 public class DatabaseConfig {
 

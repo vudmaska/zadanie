@@ -1,6 +1,7 @@
 package sk.ness.academy.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,9 +18,11 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentId;
 
+   @NotBlank(message = "Author is required.")
     @Column(name = "author")
     private String author;
 
+    @NotBlank(message = "Text is required.")
     @Column(name = "text")
     private String content;
 

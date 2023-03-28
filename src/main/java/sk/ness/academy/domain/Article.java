@@ -1,8 +1,9 @@
 package sk.ness.academy.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "articles")
@@ -18,15 +19,16 @@ public class Article {
   @Column(name = "ID")
   private Integer id;
 
-
-
-  @Column(name = "title", length = 250)
+  @NotBlank(message = "Title is required.")
+  @Column(name = "title", length = 250, nullable = false)
   private String title;
 
-  @Column(name = "text", length = 2000)
+  @NotBlank(message = "Text is required.")
+  @Column(name = "text", length = 2000, nullable = false)
   private String text;
 
-  @Column(name = "author", length = 250)
+  @NotBlank(message = "Author is required.")
+  @Column(name = "author", length = 250, nullable = false)
   private String author;
 
   @Column(name = "create_timestamp")

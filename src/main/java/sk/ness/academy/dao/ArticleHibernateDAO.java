@@ -1,16 +1,15 @@
 package sk.ness.academy.dao;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
 import sk.ness.academy.domain.Article;
+import sk.ness.academy.domain.ResourceNotFoundException;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class ArticleHibernateDAO implements ArticleDAO {
@@ -32,7 +31,12 @@ public class ArticleHibernateDAO implements ArticleDAO {
     query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
     List results = query.list();
 
-    return results;
+    if (results.isEmpty()){
+      throw new ResourceNotFoundException("No articles found");
+    } else {
+      return results;
+    }
+
   }
 
   @Override
