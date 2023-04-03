@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import sk.ness.academy.domain.Article;
+import sk.ness.academy.domain.NoContentException;
 import sk.ness.academy.domain.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ public class ArticleHibernateDAO implements ArticleDAO {
 
   @Override
   public Article findByID(final Integer articleId) {
-    return (Article) this.sessionFactory.getCurrentSession().get(Article.class, articleId);
+    return this.sessionFactory.getCurrentSession().get(Article.class, articleId);
   }
 
   @SuppressWarnings("unchecked")
@@ -28,15 +29,15 @@ public class ArticleHibernateDAO implements ArticleDAO {
     Session session = this.sessionFactory.getCurrentSession();
     String sql = "SELECT id, author, create_timestamp as created, text, title FROM articles";
     SQLQuery query = session.createSQLQuery(sql).addScalar("id").addScalar("author").addScalar("created").addScalar("text").addScalar("title");
-    query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-    List results = query.list();
+    if (query.list().isEmpty()) {
+      throw new NoContentException("No articles found.");
+    }
+    else {
+      query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+      List results = query.list();
 
-    if (results.isEmpty()){
-      throw new ResourceNotFoundException("No articles found");
-    } else {
       return results;
     }
-
   }
 
   @Override
@@ -47,16 +48,26 @@ public class ArticleHibernateDAO implements ArticleDAO {
   @Override
   public void deleteByID(final Integer articleId) {
     Article article = sessionFactory.getCurrentSession().load(Article.class, articleId);
-    this.sessionFactory.getCurrentSession().delete(article);
+    if (article == null){
+      throw new ResourceNotFoundException("Article with the id " + articleId + " not found.");
+    } else {
+        this.sessionFactory.getCurrentSession().delete(article);
+    }
   }
 
   @Override
   public List<Article> searchArticles(String searchText) {
-    return this.sessionFactory.getCurrentSession().createSQLQuery(
+    List<Article> foundArticles = sessionFactory.getCurrentSession().createSQLQuery(
                     "SELECT * FROM articles WHERE author LIKE concat(concat('%', :searchText), '%') OR title LIKE concat(concat('%', :searchText), '%') OR text LIKE concat(concat('%', :searchText), '%')")
             .setParameter("searchText", searchText)
             .addEntity(Article.class)
             .list();
+
+    if (foundArticles.isEmpty()){
+      throw new NoContentException("Nothing found for query: " + searchText);
+    } else {
+      return foundArticles;
+    }
   }
 
 }

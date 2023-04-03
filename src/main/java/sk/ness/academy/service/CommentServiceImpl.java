@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import sk.ness.academy.dao.ArticleDAO;
 import sk.ness.academy.domain.Article;
 import sk.ness.academy.domain.Comment;
+import sk.ness.academy.domain.NoContentException;
 import sk.ness.academy.domain.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -27,6 +28,9 @@ public class CommentServiceImpl implements CommentService{
     public void createComment(Integer articleId, Comment comment) {
 
         Article article = this.articleDAO.findByID(articleId);
+        if (article == null){
+            throw new ResourceNotFoundException("Article with the id " + articleId + " not found.");
+        }
         List<Comment> comments = article.getComments();
         comments.add(comment);
         article.setComments(comments);
@@ -36,9 +40,12 @@ public class CommentServiceImpl implements CommentService{
 
     public List<Comment> readComments(Integer articleId) {
         Article article = this.articleDAO.findByID(articleId);
+        if (article == null){
+            throw new ResourceNotFoundException("Article with the id " + articleId + " not found.");
+        }
         List<Comment> comments = article.getComments();
         if(comments.isEmpty()){
-            throw new ResourceNotFoundException("This article has no comments");
+           throw new NoContentException("This article has no comments");
         }
         return comments;
     }
@@ -46,9 +53,9 @@ public class CommentServiceImpl implements CommentService{
     public ResponseEntity deleteComment(Integer articleId, Integer commentId) {
         Session session = this.sessionFactory.getCurrentSession();
         if (session.createSQLQuery("select * from comments where commentId = :commentId").setParameter("commentId", commentId).list().isEmpty()){
-        //   throw new ResourceNotFoundException("Comment with id " + commentId + " not exist");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Comment with id " + commentId + " not exist");
+            throw new ResourceNotFoundException("Comment with id " + commentId + " does not exist");
+        //    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        //            .body("Comment with id " + commentId + " does not exist");
         } else {
             session.createSQLQuery("delete from comments where commentId = :commentId").setParameter("commentId", commentId).executeUpdate();
             return ResponseEntity.status(HttpStatus.CREATED)

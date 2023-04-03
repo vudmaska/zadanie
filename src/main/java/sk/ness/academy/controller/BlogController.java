@@ -50,6 +50,7 @@ public class BlogController {
 
     @RequestMapping(value = "articles/search/{searchText}", method = RequestMethod.GET)
     public List<Article> searchArticle(@PathVariable final String searchText) throws ResourceNotFoundException{
+
         if (this.articleService.searchArticles(searchText).size() == 0){
             throw new ResourceNotFoundException("Nothing was found for query: " + searchText);
         }
@@ -57,7 +58,12 @@ public class BlogController {
     }
 
     @PutMapping(value = "articles")
-    public ResponseEntity addArticle(@Valid @RequestBody final Article article, Errors errors) {
+    public ResponseEntity addArticle(@Valid @RequestBody(required=false) final Article article, Errors errors) {
+        if (article == null) {
+            System.out.println("EMPTY");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("ERROR: Request body is empty.");
+        }
         if (errors.hasFieldErrors()) {
             StringBuilder message = new StringBuilder();
             for (int i = 0; i < errors.getErrorCount(); i++) {

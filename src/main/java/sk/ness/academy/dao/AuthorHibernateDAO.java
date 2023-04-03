@@ -5,7 +5,7 @@ import org.hibernate.transform.AliasToBeanResultTransformer;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
-import sk.ness.academy.domain.ResourceNotFoundException;
+import sk.ness.academy.domain.NoContentException;
 import sk.ness.academy.dto.Author;
 import sk.ness.academy.dto.AuthorStats;
 
@@ -25,7 +25,7 @@ public class AuthorHibernateDAO implements AuthorDAO {
         .addScalar("name", StringType.INSTANCE)
         .setResultTransformer(new AliasToBeanResultTransformer(Author.class)).list();
     if (allAuthors.isEmpty()){
-      throw new ResourceNotFoundException("No authors found.");
+      throw new NoContentException("No authors found.");
     } else {
       return allAuthors;
     }
@@ -34,10 +34,14 @@ public class AuthorHibernateDAO implements AuthorDAO {
   @Override
   public List<AuthorStats> listOfAuthorsAndCount() {
     List<Author> allAuthors = findAll();
-    return this.sessionFactory.getCurrentSession().createSQLQuery("select author as authorName, count(author) as articleCount from articles group by author")
-            .addScalar("authorName", StringType.INSTANCE)
-            .addScalar("articleCount", IntegerType.INSTANCE)
-            .setResultTransformer(new AliasToBeanResultTransformer(AuthorStats.class)).list();
+    if (allAuthors.isEmpty()) {
+      throw new NoContentException("No authors found.");
+    } else {
+      return this.sessionFactory.getCurrentSession().createSQLQuery("select author as authorName, count(author) as articleCount from articles group by author")
+              .addScalar("authorName", StringType.INSTANCE)
+              .addScalar("articleCount", IntegerType.INSTANCE)
+              .setResultTransformer(new AliasToBeanResultTransformer(AuthorStats.class)).list();
+    }
   }
 
 }
