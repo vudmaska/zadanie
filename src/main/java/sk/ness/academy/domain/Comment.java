@@ -1,5 +1,9 @@
 package sk.ness.academy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -12,6 +16,12 @@ public class Comment implements Serializable {
     public Comment() {
         this.created = new Date();
     }
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "article_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Article article;
 
     @Id
     @Column(name = "commentId", unique = true, nullable = false, precision = 10, scale = 0)
@@ -61,5 +71,13 @@ public class Comment implements Serializable {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }
