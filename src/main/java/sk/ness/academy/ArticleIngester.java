@@ -1,12 +1,7 @@
 package sk.ness.academy;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import sk.ness.academy.config.DatabaseConfig;
 import sk.ness.academy.service.ArticleService;
 
@@ -21,11 +16,11 @@ public class ArticleIngester {
     try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ArticleIngester.class)) {
       context.registerShutdownHook();
 
-      final ArticleService articleService = context.getBean(ArticleService.class);
-
       // Load file with articles and ingest
 
+      final ArticleService articleService = context.getBean(ArticleService.class);
       articleService.ingestArticles("C:\\Akademia\\Java\\Academy\\zadanie\\zadanie_pokusy\\articles_to_ingest.txt");
+
     }
   }
 }

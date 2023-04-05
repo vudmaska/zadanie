@@ -2,6 +2,11 @@ package sk.ness.academy.dto;
 
 public class AuthorStats {
 
+	public AuthorStats(String authorName, Integer articleCount) {
+		this.authorName = authorName;
+		this.articleCount = articleCount;
+	}
+
 	  private String authorName;
 	  private Integer articleCount;
 
@@ -20,5 +25,6 @@ public class AuthorStats {
 	  public void setArticleCount(final Integer articleCount) {
 	    this.articleCount = articleCount;
 	  }
+
 
 	}

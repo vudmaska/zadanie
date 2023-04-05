@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.ness.academy.domain.Article;
-import sk.ness.academy.domain.ResourceNotFoundException;
+import sk.ness.academy.exceptions.ResourceNotFoundException;
 import sk.ness.academy.repository.ArticleRepo;
 
 import javax.validation.Valid;
@@ -16,6 +16,7 @@ public class ArticleController {
 
     @Autowired
     private ArticleRepo articleRepository;
+
 
     @GetMapping("/articles")
     public List<Article> getAllPosts() {
@@ -39,7 +40,7 @@ public class ArticleController {
             article.setText(articleRequest.getText());
             article.setAuthor(articleRequest.getAuthor());
             return articleRepository.save(article);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + articleId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Article with the id " + articleId + " not found"));
     }
 
 
@@ -48,7 +49,20 @@ public class ArticleController {
         return articleRepository.findById(articleId).map(article -> {
             articleRepository.delete(article);
             return ResponseEntity.ok().build();
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + articleId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Article with the id " + articleId + " not found"));
     }
+
+    @GetMapping("/author/stats")
+    public List<Object[]> listOfAuthorsAndCount(){
+        return articleRepository.findAllStats();
+    }
+
+    @GetMapping("/articles/search/{searchText}")
+    public List<Article> searchKeyword(@PathVariable String searchText){
+    //    return articleRepository.search(searchText);
+        return articleRepository.findByTitleContainingOrTextContainingOrAuthorContainingAllIgnoreCase(searchText, searchText, searchText);
+    }
+
+
 
 }
