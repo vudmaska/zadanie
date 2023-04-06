@@ -1,4 +1,4 @@
-package com.example.jpa.controller;
+package sk.ness.academy.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class CommentController {
         return articleRepo.findById(articleId).map(article -> {
             comment.setArticle(article);
             return commentRepo.save(comment);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + articleId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("Article with the id " + articleId + " not found"));
     }
 
     @PutMapping("/articles/{articleId}/comments/{commentId}")
@@ -40,7 +40,7 @@ public class CommentController {
                                  @PathVariable (value = "commentId") Integer commentId,
                                  @Valid @RequestBody Comment commentRequest) {
         if(!articleRepo.existsById(articleId)) {
-            throw new ResourceNotFoundException("PostId " + articleId + " not found");
+            throw new ResourceNotFoundException("Article with the id " + articleId + " not found");
         }
 
         return commentRepo.findById(commentId).map(comment -> {

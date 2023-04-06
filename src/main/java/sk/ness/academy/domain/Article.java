@@ -86,4 +86,11 @@ public class Article {
     this.comments = comments;
   }
 
+  public Article(Integer id, String title, String text, String author, Date createTimestamp) {
+    this.id = id;
+    this.title = title;
+    this.text = text;
+    this.author = author;
+    this.createTimestamp = createTimestamp;
+  }
 }

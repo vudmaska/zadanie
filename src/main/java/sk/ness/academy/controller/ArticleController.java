@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.ness.academy.domain.Article;
+import sk.ness.academy.dto.AuthorStats;
 import sk.ness.academy.exceptions.ResourceNotFoundException;
 import sk.ness.academy.repository.ArticleRepo;
 
@@ -17,10 +18,10 @@ public class ArticleController {
     @Autowired
     private ArticleRepo articleRepository;
 
-
     @GetMapping("/articles")
     public List<Article> getAllPosts() {
         return articleRepository.findAll();
+       // return articleRepository.findAllProjectedBy();
     }
 
     @PostMapping("/articles")
@@ -53,7 +54,7 @@ public class ArticleController {
     }
 
     @GetMapping("/author/stats")
-    public List<Object[]> listOfAuthorsAndCount(){
+    public List<AuthorStats> listOfAuthorsAndCount(){
         return articleRepository.findAllStats();
     }
 
