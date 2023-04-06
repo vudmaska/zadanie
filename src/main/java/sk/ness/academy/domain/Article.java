@@ -1,5 +1,7 @@
 package sk.ness.academy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "articles")
 @SequenceGenerator(name = "articles_seq_store", sequenceName = "article_seq", allocationSize = 1)
+
 public class Article {
 
   public Article() {
@@ -36,8 +39,9 @@ public class Article {
   private Date createTimestamp;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-  @JoinColumn(name="id")
+  @JoinColumn(name = "id")
   private List<Comment> comments;
+
   public Integer getId() {
     return this.id;
   }
@@ -94,3 +98,5 @@ public class Article {
     this.createTimestamp = createTimestamp;
   }
 }
+
+

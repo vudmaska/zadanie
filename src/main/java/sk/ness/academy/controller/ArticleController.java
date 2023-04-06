@@ -20,8 +20,9 @@ public class ArticleController {
 
     @GetMapping("/articles")
     public List<Article> getAllPosts() {
-        return articleRepository.findAll();
-       // return articleRepository.findAllProjectedBy();
+        //return articleRepository.findAll();
+       return articleRepository.findAll();
+
     }
 
     @PostMapping("/articles")

@@ -18,6 +18,11 @@ public interface ArticleRepo extends JpaRepository<Article, Integer> {
     @Query("SELECT new sk.ness.academy.domain.Article(a.id, a.title, a.text, a.author, a.createTimestamp) from Article a")
     List<Article> findAll();
 
-    @Query("SELECT a.id, a.title, a.text, a.author FROM Article a")
-    List<Object[]> findAllProjectedBy();
+
+
+   // @Query("SELECT new sk.ness.academy.domain.Article(a.id, a.title, a.text, a.author) FROM Article a")
+   // List<Article> findAllProjectedBy();
+
+
+
 }
