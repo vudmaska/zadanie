@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import sk.ness.academy.dao.ArticleDAO;
 import sk.ness.academy.domain.Article;
 import sk.ness.academy.domain.Comment;
-import sk.ness.academy.domain.ResourceNotFoundException;
+import sk.ness.academy.exceptions.ResourceNotFoundException;
 import sk.ness.academy.dto.Author;
 import sk.ness.academy.dto.AuthorStats;
 import sk.ness.academy.service.ArticleService;

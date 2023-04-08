@@ -1,4 +1,4 @@
-package sk.ness.academy.domain;
+package sk.ness.academy.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

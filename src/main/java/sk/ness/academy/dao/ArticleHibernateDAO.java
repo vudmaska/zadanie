@@ -6,8 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import sk.ness.academy.domain.Article;
-import sk.ness.academy.domain.NoContentException;
-import sk.ness.academy.domain.ResourceNotFoundException;
+import sk.ness.academy.exceptions.NoContentException;
+import sk.ness.academy.exceptions.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;

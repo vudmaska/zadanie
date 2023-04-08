@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import sk.ness.academy.dao.ArticleDAO;
 import sk.ness.academy.domain.Article;
 import sk.ness.academy.domain.Comment;
-import sk.ness.academy.domain.NoContentException;
-import sk.ness.academy.domain.ResourceNotFoundException;
+import sk.ness.academy.exceptions.NoContentException;
+import sk.ness.academy.exceptions.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;

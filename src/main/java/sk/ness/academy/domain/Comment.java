@@ -24,7 +24,7 @@ public class Comment implements Serializable {
 
     @NotBlank(message = "Text is required.")
     @Column(name = "text")
-    private String content;
+    private String text;
 
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
@@ -38,13 +38,13 @@ public class Comment implements Serializable {
         this.commentId = commentId;
     }
 
-    public String getContent() {
-        return content;
+    public String getText() {
+        return text;
     }
 
-    public String setContent(String content) {
-        this.content = content;
-        return content;
+    public String setText(String text) {
+        this.text = text;
+        return text;
     }
 
     public String getAuthor() {
