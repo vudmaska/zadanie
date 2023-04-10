@@ -40,6 +40,7 @@ public class Article {
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
   @JoinColumn(name = "id")
+  //@JsonIgnore
   private List<Comment> comments;
 
   public Integer getId() {

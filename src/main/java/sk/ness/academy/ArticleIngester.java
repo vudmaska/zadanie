@@ -21,7 +21,7 @@ public class ArticleIngester {
       // Load file with articles and ingest
 
       final ArticleService articleService = context.getBean(ArticleService.class);
-      articleService.ingestArticles("C:\\Akademia\\Java\\Academy\\zadanie\\zadanie_pokusy\\articles_to_ingest.txt");
+      articleService.ingestArticles("D:\\Java\\zadanie\\articles_to_ingest.txt");
 
     }
   }

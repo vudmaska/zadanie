@@ -15,14 +15,5 @@ public interface ArticleRepo extends JpaRepository<Article, Integer> {
 
     List<Article> findByTitleContainingOrTextContainingOrAuthorContainingAllIgnoreCase(String searchText, String searchText1, String searchText2);
 
-    @Query("SELECT new sk.ness.academy.domain.Article(a.id, a.title, a.text, a.author, a.createTimestamp) from Article a")
-    List<Article> findAll();
-
-
-
-   // @Query("SELECT new sk.ness.academy.domain.Article(a.id, a.title, a.text, a.author) FROM Article a")
-   // List<Article> findAllProjectedBy();
-
-
 
 }

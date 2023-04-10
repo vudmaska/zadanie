@@ -18,11 +18,10 @@ public class ArticleController {
     @Autowired
     private ArticleRepo articleRepository;
 
+
     @GetMapping("/articles")
     public List<Article> getAllPosts() {
-        //return articleRepository.findAll();
-       return articleRepository.findAll();
-
+        return articleRepository.findAll();
     }
 
     @PostMapping("/articles")
