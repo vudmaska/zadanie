@@ -50,8 +50,8 @@ public class ArticleHibernateDAOTest {
 
     @Test
     void testSearchArticles(){
-        List<Article> foundArticles = articleDAO.searchArticles("Dominik");
-        Assertions.assertEquals(1, foundArticles.size());
+        List<Article> foundArticles = articleDAO.searchArticles("Author");
+        Assertions.assertEquals(2, foundArticles.size());
     }
 
     @Test

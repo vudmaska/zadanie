@@ -1,0 +1,4 @@
+sk\ness\academy\config\TestDatabaseConfig.class
+sk\ness\academy\AuthorHibernateDAOTest.class
+sk\ness\academy\ArticleHibernateDAOTest.class
+sk\ness\academy\CommentHibernateDAOTest.class

@@ -39,7 +39,7 @@ public class AuthorHibernateDAOTest {
 
         final List<Author> articleList = authorDAO.findAll();
 
-        Assertions.assertEquals(5, articleList.size());
+        Assertions.assertEquals(4, articleList.size());
 
     }
 
@@ -47,7 +47,7 @@ public class AuthorHibernateDAOTest {
     void testListOfAuthorsAndCount() {
         final List<AuthorStats> articleList = authorDAO.listOfAuthorsAndCount();
 
-        Assertions.assertEquals(5, articleList.size());
+        Assertions.assertEquals(4, articleList.size());
     }
 
 

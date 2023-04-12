@@ -4,6 +4,7 @@ C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\dto
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\service\AuthorServiceImpl.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\service\CommentServiceImpl.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\dto\Author.java
+C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\dao\CommentDAO.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\ArticleIngester.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\exceptions\ResourceNotFoundException.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\config\DatabaseConfig.java
@@ -14,6 +15,7 @@ C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\exc
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\service\ArticleServiceImpl.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\service\ArticleService.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\dao\ArticleHibernateDAO.java
+C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\dao\CommentHibernateDAO.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\service\AuthorService.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\controller\BlogController.java
 C:\Akademia\Java\Academy\zadanie\zadanie_final\src\main\java\sk\ness\academy\dao\AuthorHibernateDAO.java
