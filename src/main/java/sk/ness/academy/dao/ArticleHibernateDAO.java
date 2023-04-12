@@ -20,6 +20,9 @@ public class ArticleHibernateDAO implements ArticleDAO {
 
   @Override
   public Article findByID(final Integer articleId) {
+    if (this.sessionFactory.getCurrentSession().get(Article.class, articleId) == null) {
+      throw new ResourceNotFoundException("Article with the id " + articleId + " not found.");
+    }
     return this.sessionFactory.getCurrentSession().get(Article.class, articleId);
   }
 

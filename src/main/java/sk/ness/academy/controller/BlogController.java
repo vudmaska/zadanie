@@ -6,6 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import sk.ness.academy.dao.ArticleDAO;
+import sk.ness.academy.dao.CommentDAO;
 import sk.ness.academy.domain.Article;
 import sk.ness.academy.domain.Comment;
 import sk.ness.academy.exceptions.ResourceNotFoundException;
@@ -30,6 +31,9 @@ public class BlogController {
 
     @Resource
     private ArticleDAO articleDAO;
+
+    @Resource
+    private CommentDAO commentDAO;
 
     @Resource
     private CommentService commentService;
