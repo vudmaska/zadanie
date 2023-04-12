@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.ness.academy.domain.Comment;
+import sk.ness.academy.exceptions.NoContentException;
 import sk.ness.academy.exceptions.ResourceNotFoundException;
 import sk.ness.academy.repository.ArticleRepo;
 import sk.ness.academy.repository.CommentRepo;
@@ -23,6 +24,9 @@ public class CommentController {
 
     @GetMapping("/articles/{articleId}/comments")
     public List<Comment> getAllCommentsByArticleId(@PathVariable (value = "articleId") Integer articleId) {
+        if (commentRepo.findByArticleId(articleId).isEmpty()){
+            throw new NoContentException("Article has no comments.");
+        }
         return commentRepo.findByArticleId(articleId);
     }
 

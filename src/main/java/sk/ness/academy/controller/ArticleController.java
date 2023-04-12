@@ -5,12 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.ness.academy.domain.Article;
 import sk.ness.academy.dto.AuthorStats;
+import sk.ness.academy.exceptions.NoContentException;
 import sk.ness.academy.exceptions.ResourceNotFoundException;
+import sk.ness.academy.repository.ArticleProjection;
 import sk.ness.academy.repository.ArticleRepo;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ArticleController {
@@ -18,10 +19,9 @@ public class ArticleController {
     @Autowired
     private ArticleRepo articleRepository;
 
-
     @GetMapping("/articles")
-    public List<Article> getAllPosts() {
-        return articleRepository.findAll();
+    public List<ArticleProjection> getAllPosts() {
+        return articleRepository.findAllProjectedBy();
     }
 
     @PostMapping("/articles")
@@ -30,8 +30,12 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{articleId}")
-    public Optional<Article> getArticle(@Valid @PathVariable Integer articleId){
-        return articleRepository.findById(articleId);
+    public ResponseEntity getArticle(@Valid @PathVariable Integer articleId){
+
+        if(this.articleRepository.findById(articleId).isEmpty()) {
+            throw new ResourceNotFoundException("Article with the id " + articleId + " not found.");
+        }
+        return ResponseEntity.ok(this.articleRepository.findById(articleId));
     }
 
     @PutMapping("/articles/{articleId}")
@@ -55,12 +59,17 @@ public class ArticleController {
 
     @GetMapping("/author/stats")
     public List<AuthorStats> listOfAuthorsAndCount(){
+        if (articleRepository.findAllStats().isEmpty()){
+            throw new NoContentException("There are no authors/articles.");
+        }
         return articleRepository.findAllStats();
     }
 
     @GetMapping("/articles/search/{searchText}")
     public List<Article> searchKeyword(@PathVariable String searchText){
-    //    return articleRepository.search(searchText);
+        if (articleRepository.findByTitleContainingOrTextContainingOrAuthorContainingAllIgnoreCase(searchText,searchText,searchText).isEmpty()){
+            throw new NoContentException("Nothing found.");
+        }
         return articleRepository.findByTitleContainingOrTextContainingOrAuthorContainingAllIgnoreCase(searchText, searchText, searchText);
     }
 
