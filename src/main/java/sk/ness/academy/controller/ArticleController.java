@@ -57,7 +57,7 @@ public class ArticleController {
         }).orElseThrow(() -> new ResourceNotFoundException("Article with the id " + articleId + " not found"));
     }
 
-    @GetMapping("/author/stats")
+    @GetMapping("/authors/stats")
     public List<AuthorStats> listOfAuthorsAndCount(){
         if (articleRepository.findAllStats().isEmpty()){
             throw new NoContentException("There are no authors/articles.");
