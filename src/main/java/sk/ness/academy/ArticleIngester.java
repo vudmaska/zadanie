@@ -25,7 +25,7 @@ public class ArticleIngester {
 
       // Load file with articles and ingest
 
-      articleService.ingestArticles("D:\\Java\\zadanie\\articles_to_ingest.txt");
+      articleService.ingestArticles(System.getProperty("user.dir") + "\\articles_to_ingest.txt");
     }
   }
 }
